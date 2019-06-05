@@ -1,8 +1,14 @@
 ---
 title: FastDFS单机搭建
 date: 2019-06-05 11:01:27
-tags: FastDFS
+categories:
+    - 那些年追过的框架
+tags:
+    - 框架-FastDFS文件服务
 ---
+
+![架构图](1.png)
+<!-- more -->
 
 # FastDFS 单机版搭建
 
@@ -12,11 +18,6 @@ tags: FastDFS
 
 #### 简单概念介绍
 
-架构图
-
-![架构图](1.png)
-
-<!-- more -->
 Tracker 服务
 
 跟踪服务器，主要负责调度 storage 节点与 client 通信，在访问上起负载均衡的作用，和记录 storage 节点的运行状态，是连接 client 和 storage 节点的枢纽
