@@ -16,6 +16,7 @@ tags: FastDFS
 
 ![架构图](1.png)
 
+<!-- more -->
 Tracker 服务
 
 跟踪服务器，主要负责调度 storage 节点与 client 通信，在访问上起负载均衡的作用，和记录 storage 节点的运行状态，是连接 client 和 storage 节点的枢纽
