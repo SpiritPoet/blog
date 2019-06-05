@@ -2,12 +2,13 @@
 title: FastDFS单机搭建
 date: 2019-06-05 11:01:27
 categories:
-    - 那些年追过的框架
+  - 那些年追过的框架
 tags:
-    - 框架-FastDFS文件服务
+  - 框架-FastDFS文件服务
 ---
 
 ![架构图](1.png)
+
 <!-- more -->
 
 # FastDFS 单机版搭建
@@ -191,3 +192,40 @@ grop_name 和 remote_filename 就是上面测试成功返回的信息中 画红�
 #### 结合 Java Spring Boot 框架 构建文件上传服务
 
 这里我不做详细说明：提供一个别人的 github 项目给大家参考 [请点击这里参考](https://github.com/bojiangzhou/lyyzoo-fastdfs-java)
+
+#### 关于 FastDFS 下载文件名不是原来文件名的解决方案
+
+利用 nginx
+修改 nginx.conf
+在代理路径下添加如下代码
+
+```java
+    if ($arg_attname ~ "^(.+)") {
+        #设置下载
+        add_header Content-Type application/x-download;
+        #设置文件名
+        add_header Content-Disposition "attachment;filename=$arg_attname";
+    }
+
+```
+
+    完整配置如下
+
+```java
+    location /group1/M00/ {
+    	root /fastdfs/data;  注释：填写数据存储路径，前面root别忘记
+    	if ($arg_attname ~ "^(.+)") {
+        	#设置下载
+        	add_header Content-Type application/x-download;
+        	#设置文件名
+        	add_header Content-Disposition "attachment;filename=$arg_attname";
+    	}
+    	ngx_fastdfs_module;
+    }
+
+```
+
+然后在请求后面跟上 ?arg_attname=文件名.后缀
+
+例如：
+http://172.16.201.102:9800/gos/M00/00/04/wKgBalz2MJKEA8K5AAABAM3uJVE733.xls?arg_attname=测试.xls
