@@ -1,7 +1,10 @@
 ---
 title: 利用Vultr搭建Shadowsocks
 date: 2019-06-08 09:17:16
+categories:
+    - 工欲善其事必先利其器
 tags:
+    - 利器-科学上网
 ---
 
 # 利用 Vultr 搭建 Shadowsocks（科学上网）
